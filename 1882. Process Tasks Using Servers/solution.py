@@ -3,11 +3,11 @@ class Solution:
         free = [(w, i) for i, w in enumerate(servers)]
         heapify(free)
 
-        ans, busy = [], []  # busy: (second it frees up, weight, index)
+        ans, busy = [], []
         for s, t in enumerate(tasks):
-            while busy and busy[0][0] <= s:  # done by second s
+            while busy and busy[0][0] <= s:
                 heappush(free, heappop(busy)[1:])
-            start, w, i = (s, *heappop(free)) if free else heappop(busy)  # none free: the first to finish takes it
+            start, w, i = (s, *heappop(free)) if free else heappop(busy)
             heappush(busy, (start + t, w, i))
             ans.append(i)
 
